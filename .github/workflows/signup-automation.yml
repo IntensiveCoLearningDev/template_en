@@ -146,8 +146,10 @@ jobs:
             const { owner, repo } = context.repo;
             const issue_number = context.payload.issue.number;
             const githubId = '${{ steps.extract-info.outputs.github_id }}';
+            const notesPath = `notes/${githubId}.md`;
 
             try {
+              console.log(`Posting signup comment: repo=${owner}/${repo} issue=#${issue_number} user=${githubId}`);
               await github.rest.issues.createComment({
                 owner,
                 repo,
@@ -157,10 +159,10 @@ jobs:
                 - 👤 GitHub ID: @${githubId}
                 - 📝 Notes file created: \`${notesPath}\`
 
-                Let's start Intensive Co-learning! 🎉
+                Let's start Intensive Co-learning! 🎉`
               });
-              console.log(`Comment posted on issue #${issue_number}`);
+              console.log(`Comment posted: issue=#${issue_number} user=${githubId} path=${notesPath}`);
             } catch (error) {
-              console.error(`Error posting comment: ${error.message}`);
+              console.error(`Error posting comment: issue=#${issue_number} user=${githubId} error=${error.message}`);
               core.setFailed(`Error posting comment: ${error.message}`);
             }
