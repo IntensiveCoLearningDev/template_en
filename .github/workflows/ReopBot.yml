@@ -91,11 +91,11 @@ jobs:
               console.log(`Account Type: ${user.type}`);
               console.log(`Created At: ${user.created_at}`);
 
-              const response = await axios.get(`https://api.intensivecolearn.ing/api/programs/createByRepo/${owner}/${repo}`);
+              const response = await axios.get(`https://api-dev.intensivecolearn.ing/api/programs/createByRepo/${owner}/${repo}`);
 
               console.log('API response:', response.data);
 
-              const updateUserNotesResp = await axios.get(`https://api.intensivecolearn.ing/api/programs/updateStudynotes?owner=${owner}&repo=${repo}&userGitId=${user.id}`);
+              const updateUserNotesResp = await axios.get(`https://api-dev.intensivecolearn.ing/api/programs/updateStudynotes?owner=${owner}&repo=${repo}&userGitId=${user.id}`);
 
               console.log('updateUserNotesRespAPI response:', updateUserNotesResp.data);
 
